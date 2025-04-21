@@ -4,8 +4,8 @@ ENV HOME=/usr/app
 RUN mkdir -p HOME
 WORKDIR $HOME
 ADD . $HOME
+RUN chmod +x mvnw  # 添加这行来给 mvnw 脚本添加可执行权限
 RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package
-
 
 #运行阶段
 FROM openjdk:17-slim
